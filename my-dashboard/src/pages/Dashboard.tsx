@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import BarGraph from '../components/BarGraph';
@@ -19,6 +19,19 @@ const Dashboard: React.FC = () => {
     ],
   };
 
+
+  const barchartData = [
+    { label: 'Category A', value: 10 },
+    { label: 'Category B', value: 20 },
+    { label: 'Category A', value: 15 },
+    // Add more data as needed
+  ];
+  const [filter, setFilter] = useState<string>(''); // State for filter
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilter(event.target.value); // Update filter state based on user selection
+  };
+
+
   const options = {
     responsive: true,
     plugins: {
@@ -37,7 +50,14 @@ const Dashboard: React.FC = () => {
       <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
       <div className="bg-white p-4 rounded-lg shadow-md">
         <Line data={data} options={options} />
-        <BarGraph/>
+        {/* Filter dropdown */}
+      <select value={filter} onChange={handleChange}>
+        <option value="">All</option>
+        <option value="Category A">Category A</option>
+        <option value="Category B">Category B</option>
+        {/* Add more options based on your data */}
+      </select>
+        <BarGraph data={barchartData} filter={filter}/>
       </div>
     </div>
   );
