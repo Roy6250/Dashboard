@@ -1,6 +1,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import BarGraph from '../components/BarGraph';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -36,6 +37,7 @@ const Dashboard: React.FC = () => {
       <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
       <div className="bg-white p-4 rounded-lg shadow-md">
         <Line data={data} options={options} />
+        <BarGraph/>
       </div>
     </div>
   );
